@@ -26,15 +26,8 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.3);
     }
 
-    h1 {
-      color: #ff3366;
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #444;
-      line-height: 1.4;
-    }
+    h1 { color: #ff3366; }
+    p { color: #444; }
 
     button {
       padding: 12px 22px;
@@ -42,29 +35,17 @@
       border-radius: 25px;
       font-size: 16px;
       cursor: pointer;
-      margin: 10px;
+      margin: 8px;
     }
 
-    #yes {
-      background: #ff3366;
-      color: white;
-    }
-
-    #no {
-      background: #ddd;
-      position: relative;
-    }
+    #play { background: #222; color: white; }
+    #yes { background: #ff3366; color: white; }
+    #no  { background: #ddd; }
 
     img {
       width: 100%;
       border-radius: 18px;
       margin-top: 15px;
-    }
-
-    .hint {
-      font-size: 12px;
-      color: #777;
-      margin-top: 12px;
     }
   </style>
 </head>
@@ -73,51 +54,43 @@
 
   <div class="card" id="card">
     <h1>Tanu ❤️</h1>
-    <p>
-      Will you be my Valentine?<br>
-      <strong>Please don’t say no 🥺</strong>
-    </p>
+    <p>Will you be my Valentine?<br><strong>Please don’t say no 🥺</strong></p>
 
+    <button id="play">▶️ Play Music</button><br>
     <button id="yes">Yes ❤️</button>
     <button id="no">No 🙈</button>
-
-    <div class="hint">Tap anywhere for music 🎶</div>
   </div>
 
-  <!-- Local song file -->
-  <audio id="song" preload="auto">
+  <!-- Local song -->
+  <audio id="song">
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
   <script>
+    const song = document.getElementById("song");
+    const playBtn = document.getElementById("play");
     const yesBtn = document.getElementById("yes");
     const noBtn = document.getElementById("no");
     const card = document.getElementById("card");
-    const song = document.getElementById("song");
 
-    // Play song after first tap (mobile-safe)
-    document.body.addEventListener("click", () => {
+    playBtn.onclick = () => {
       song.play();
-    }, { once: true });
+      playBtn.innerText = "🎶 Playing";
+    };
 
-    // Move NO button
-    noBtn.addEventListener("mouseover", () => {
+    noBtn.onmouseover = () => {
       noBtn.style.position = "absolute";
       noBtn.style.left = Math.random() * 200 + "px";
-      noBtn.style.top = Math.random() * 200 + "px";
-    });
+      noBtn.style.top  = Math.random() * 200 + "px";
+    };
 
-    // YES → show image
-    yesBtn.addEventListener("click", () => {
+    yesBtn.onclick = () => {
       card.innerHTML = `
         <h1>🥰 It’s Us</h1>
         <img src="us.jpg">
-        <p>
-          Tanu love u ❤️<br>
-          Happy Valentine’s, Tanu 🌸
-        </p>
+        <p>sweeta i knew u wont say no ❤️<br>Happy Valentine’s, Tanu 🌸</p>
       `;
-    });
+    };
   </script>
 
 </body>
