@@ -9,7 +9,7 @@
     body {
       margin: 0;
       height: 100vh;
-      background: linear-gradient(135deg, #ff5f8d, #ff9aa2);
+      background: linear-gradient(135deg, #ff6f91, #ff9aa2);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -18,13 +18,12 @@
 
     .card {
       background: white;
-      padding: 25px;
-      border-radius: 20px;
+      padding: 30px;
+      border-radius: 25px;
       text-align: center;
       width: 90%;
-      max-width: 350px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-      position: relative;
+      max-width: 360px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
     }
 
     h1 {
@@ -34,6 +33,7 @@
 
     p {
       color: #444;
+      line-height: 1.4;
     }
 
     button {
@@ -57,14 +57,14 @@
 
     img {
       width: 100%;
-      border-radius: 15px;
+      border-radius: 18px;
       margin-top: 15px;
     }
 
     .hint {
       font-size: 12px;
       color: #777;
-      margin-top: 10px;
+      margin-top: 12px;
     }
   </style>
 </head>
@@ -84,19 +84,20 @@
     <div class="hint">Tap anywhere for music 🎶</div>
   </div>
 
-  <!-- Music iframe (loads only after tap) -->
-  <iframe id="music" width="0" height="0" allow="autoplay"></iframe>
+  <!-- Local song file -->
+  <audio id="song" preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     const yesBtn = document.getElementById("yes");
     const noBtn = document.getElementById("no");
     const card = document.getElementById("card");
-    const music = document.getElementById("music");
+    const song = document.getElementById("song");
 
-    // Play Pakistani song after first tap (iPhone safe)
+    // Play song after first tap (mobile-safe)
     document.body.addEventListener("click", () => {
-      music.src =
-        "https://www.youtube.com/embed/QL76UYrO-BE?autoplay=1&loop=1&playlist=QL76UYrO-BE";
+      song.play();
     }, { once: true });
 
     // Move NO button
@@ -106,13 +107,13 @@
       noBtn.style.top = Math.random() * 200 + "px";
     });
 
-    // YES button shows your photo
+    // YES → show image
     yesBtn.addEventListener("click", () => {
       card.innerHTML = `
         <h1>🥰 It’s Us</h1>
         <img src="us.jpg">
         <p>
-          Tu meri zindagi hai ❤️<br>
+          Tanu love u ❤️<br>
           Happy Valentine’s, Tanu 🌸
         </p>
       `;
